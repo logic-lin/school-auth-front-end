@@ -35,6 +35,7 @@ import styles from './style/index.module.less';
 import defaultLocale from '@/locale';
 import useStorage from '@/utils/useStorage';
 import { generatePermission } from '@/routes';
+import { clearToken } from '@/utils/token';
 
 function Navbar({ show }: { show: boolean }) {
   const t = useLocale();
@@ -48,6 +49,7 @@ function Navbar({ show }: { show: boolean }) {
 
   function logout() {
     setUserStatus('logout');
+    clearToken()
     window.location.href = '/login';
   }
 
@@ -130,7 +132,7 @@ function Navbar({ show }: { show: boolean }) {
       <Divider style={{ margin: '4px 0' }} />
       <Menu.Item key="logout">
         <IconPoweroff className={styles['dropdown-icon']} />
-        {t['navbar.logout']}
+        注销
       </Menu.Item>
     </Menu>
   );

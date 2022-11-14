@@ -8,7 +8,7 @@ import Announcement from './announcement';
 import Carousel from './carousel';
 import Docs from './docs';
 import styles from './style/index.module.less';
-import './mock';
+// import './mock';
 
 const { Row, Col } = Grid;
 
@@ -17,7 +17,7 @@ const gutter = 16;
 function Workplace() {
   return (
     <Space size={16} align="start">
-      <Space size={16} direction="vertical">
+      {/* <Space size={16} direction="vertical">
         <Overview />
         <Row gutter={gutter}>
           <Col span={12}>
@@ -31,9 +31,8 @@ function Workplace() {
       <Space className={styles.right} size={16} direction="vertical">
         <Shortcuts />
         <Carousel />
-        <Announcement />
         <Docs />
-      </Space>
+      </Space> */}
     </Space>
   );
 }

@@ -5,10 +5,12 @@ const {
   addWebpackModuleRule,
   addWebpackPlugin,
   addWebpackAlias,
+  overrideDevServer
 } = require('customize-cra');
 const ArcoWebpackPlugin = require('@arco-plugins/webpack-react');
 const addLessLoader = require('customize-cra-less-loader');
 const setting = require('./src/settings.json');
+const addDevServerConfig = require('./src/setupProxy')
 
 module.exports = {
   webpack: override(
@@ -33,4 +35,7 @@ module.exports = {
       '@': path.resolve(__dirname, 'src'),
     })
   ),
+  devServer: overrideDevServer(
+    addDevServerConfig
+  )
 };
