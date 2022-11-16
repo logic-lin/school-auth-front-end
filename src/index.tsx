@@ -21,6 +21,7 @@ const store = createStore(rootReducer);
 function Index() {
   const [lang, setLang] = useStorage('arco-lang', 'en-US');
   const [theme, setTheme] = useStorage('arco-theme', 'light');
+  const history = useHistory()
 
   function getArcoLocale() {
     switch (lang) {
@@ -45,7 +46,6 @@ function Index() {
         payload: { userInfo: res.data, userLoading: false },
       });
     }).catch(err => {
-      console.log(err)
       if (window.location.pathname.replace(/\//g, '') !== 'login') {
         window.location.pathname = '/login';
       }

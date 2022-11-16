@@ -30,15 +30,10 @@ export default function LoginForm() {
         payload: { userInfo: res.data },
       });
       history.push('/')
-      console.log(res)
     }).finally(() => {
       setLoading(false)
     })
   }
-
-  useEffect(() => {
-    if (getToken()) history.push('/')
-  }, [])
 
   function onSubmitClick() {
     formRef.current.validate().then((values) => {

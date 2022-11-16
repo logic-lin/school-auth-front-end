@@ -5,3 +5,6 @@ export const registerUser = (userInfo) => request.post('/user/register', userInf
 export const loginUser = (account, password) => request.post('/user/login', { account, password });
 
 export const getUserInfo = () => request.get('/user/getUserInfo', {})
+
+export const updateUser = (user) => request.post('/user/update', user);
+

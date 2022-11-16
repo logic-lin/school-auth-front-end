@@ -21,7 +21,8 @@ instance.interceptors.response.use(req => {
   }
   return req.data;
 }, err => {
-  console.log(err)
+  console.dir(err)
+  Message.error('未知错误')
   // if (error.response.status === 401) {
   //   // 无效的 token
   //   // 把 Vuex 中的 token 重置为空，并跳转到登录页面

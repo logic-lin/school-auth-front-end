@@ -71,7 +71,7 @@ function PageLayout() {
     (state: GlobalState) => state
   );
 
-  const [routes, defaultRoute] = useRoute(userInfo?.permissions);
+  const [routes, defaultRoute] = useRoute([]);
   const defaultSelectedKeys = [currentComponent || defaultRoute];
   const paths = (currentComponent || defaultRoute).split('/');
   const defaultOpenKeys = paths.slice(0, paths.length - 1);
