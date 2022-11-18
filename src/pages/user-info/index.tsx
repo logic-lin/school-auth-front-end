@@ -1,7 +1,6 @@
 import React from 'react';
-import { Typography, Card, Select, Upload, Modal } from '@arco-design/web-react';
+import { Card, Select, Upload, Modal } from '@arco-design/web-react';
 import { loginUser, updateUser } from '@/api/user';
-import { getToken, setToken } from '@/utils/token';
 import {
   Form,
   Input,
@@ -10,8 +9,8 @@ import {
   Message,
 } from '@arco-design/web-react';
 import { FormInstance } from '@arco-design/web-react/es/Form';
-import { IconCode, IconEmail, IconIdcard, IconInfo, IconLock, IconMan, IconPen, IconPhone, IconUser } from '@arco-design/web-react/icon';
-import { useEffect, useRef, useState } from 'react';
+import { IconEmail, IconIdcard, IconInfo, IconPen, IconPhone, IconUser } from '@arco-design/web-react/icon';
+import { useRef, useState } from 'react';
 import { useSelector, useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { GlobalState, IUserInfo } from '@/store';
@@ -22,16 +21,17 @@ type UserInfoUpdate = Omit<IUserInfo, 'certificate'> & {
   certificate?: Array<{ url: string }>;
 }
 
-function Example() {
+function UserInfo() {
   const formRef = useRef<FormInstance>();
   const [loading, setLoading] = useState(false);
   const history = useHistory()
   const store = useStore()
-  const userInfo = useSelector((state: GlobalState) => {
-    const info: UserInfoUpdate = { ...state.userInfo, certificate: state.userInfo.certificate ? [{ url: state.userInfo.certificate }] : [] }
-    delete info.permissions
-    return info
-  });
+  const userInfo: UserInfoUpdate = useSelector((state: GlobalState) =>
+  ({
+    ...state.userInfo,
+    certificate: state.userInfo.certificate
+      ? [{ url: state.userInfo.certificate }] : []
+  }));
 
   function onSubmitClick() {
     formRef.current.validate().then((values) => {
@@ -48,7 +48,7 @@ function Example() {
   }
 
   return (
-    <Card style={{ height: '80vh' }}>
+    <Card>
       <Form
         labelAlign="left"
         ref={formRef}
@@ -155,4 +155,4 @@ function Example() {
   );
 }
 
-export default Example;
+export default UserInfo;

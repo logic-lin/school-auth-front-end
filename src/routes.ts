@@ -13,18 +13,31 @@ export type IRoute = AuthParams & {
 
 export const routes: IRoute[] = [
   {
-    name: 'menu.dashboard',
+    name: '首页',
     key: 'dashboard',
+    requiredPermissions: [
+      { resource: 'home', actions: ['read', 'write'] },
+    ],
     children: [
       {
-        name: 'menu.dashboard.workplace',
+        name: '仪表盘',
         key: 'dashboard/workplace',
       },
     ],
   },
   {
-    name: 'Example',
-    key: 'example',
+    name: '信息补充',
+    key: 'user-info',
+    requiredPermissions: [
+      { resource: 'manage-userinfo', actions: ['read', 'write'] },
+    ],
+  },
+  {
+    name: '账户审核',
+    key: 'verify-account',
+    requiredPermissions: [
+      { resource: 'verify-account', actions: ['read', 'write'] },
+    ],
   },
 ];
 

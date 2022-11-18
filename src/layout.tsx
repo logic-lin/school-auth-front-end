@@ -7,6 +7,8 @@ import {
   IconTag,
   IconMenuFold,
   IconMenuUnfold,
+  IconUser,
+  IconStamp,
 } from '@arco-design/web-react/icon';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
@@ -30,8 +32,10 @@ function getIconFromKey(key) {
   switch (key) {
     case 'dashboard':
       return <IconDashboard className={styles.icon} />;
-    case 'example':
-      return <IconTag className={styles.icon} />;
+    case 'user-info':
+      return <IconUser className={styles.icon} />;
+    case 'verify-account':
+      return <IconStamp className={styles.icon} />;
     default:
       return <div className={styles['icon-empty']} />;
   }
@@ -71,7 +75,7 @@ function PageLayout() {
     (state: GlobalState) => state
   );
 
-  const [routes, defaultRoute] = useRoute([]);
+  const [routes, defaultRoute] = useRoute(userInfo?.permissions);
   const defaultSelectedKeys = [currentComponent || defaultRoute];
   const paths = (currentComponent || defaultRoute).split('/');
   const defaultOpenKeys = paths.slice(0, paths.length - 1);

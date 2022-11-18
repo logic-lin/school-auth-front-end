@@ -1,7 +1,7 @@
 import { Gender, Role, VerifyStatus } from '@/constrant/enum';
 import defaultSettings from '../settings.json';
 
-export interface IUserInfo{
+export interface IUserInfo {
   name?: string;
   phone?: string;
   email?: string;

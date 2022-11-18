@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Tooltip,
   Input,
@@ -24,7 +24,8 @@ import {
   IconInteraction,
   IconTag,
   IconCheckCircle,
-  IconClockCircle
+  IconClockCircle,
+  IconLock
 } from '@arco-design/web-react/icon';
 import { useSelector, useDispatch } from 'react-redux';
 import { GlobalState } from '@/store';
@@ -39,11 +40,13 @@ import defaultLocale from '@/locale';
 import useStorage from '@/utils/useStorage';
 import { generatePermission } from '@/routes';
 import { clearToken } from '@/utils/token';
+import VerifyTag from '../VerifyTag';
+import UpdatePasswordModal from '../UpdatePasswordModal';
 
 function Navbar({ show }: { show: boolean }) {
   const t = useLocale();
   const userInfo: any = useSelector((state: GlobalState) => state.userInfo);
-
+  const [visible, setVisible] = useState(false);
   const [_, setUserStatus] = useStorage('userStatus');
 
   function logout() {
@@ -55,22 +58,21 @@ function Navbar({ show }: { show: boolean }) {
   function onMenuItemClick(key) {
     if (key === 'logout') {
       logout();
-    } else {
-      Message.info(`You clicked ${key}`);
+    } else if (key === 'reset-password') {
+      setVisible(true);
     }
   }
-
   const droplist = (
     <Menu onClickMenuItem={onMenuItemClick}>
-      <Menu.Item key="setting">
-        <IconSettings className={styles['dropdown-icon']} />
-        {t['menu.user.setting']}
+      <Menu.Item key="reset-password">
+        <IconLock className={styles['dropdown-icon']} />
+        修改密码
       </Menu.Item>
       <Menu.SubMenu
         key="more"
         title={
           <div style={{ width: 80 }}>
-            <IconExperiment className={styles['dropdown-icon']} />
+            <IconLock className={styles['dropdown-icon']} />
             {t['message.seeMore']}
           </div>
         }
@@ -97,12 +99,15 @@ function Navbar({ show }: { show: boolean }) {
           <div className={styles['logo-name']}>Union Auth</div>
         </div>
       </div>
+      <UpdatePasswordModal 
+        visible={visible} 
+        onClose={() => setVisible(false)} 
+        onFinish={() => setVisible(false)} 
+      />
       <ul className={styles.right}>
-        <li>{
-          userInfo?.verify_status === 1 ?
-            <Tag color="green" icon={<IconCheckCircle />}>已认证</Tag> :
-            <Tag color="gray" icon={<IconClockCircle />}>待认证</Tag>
-        }</li>
+        <li>
+          <VerifyTag verify_status={userInfo?.verify_status} />
+        </li>
         <li></li>
         {userInfo && (
           <li>

@@ -8,3 +8,5 @@ export const getUserInfo = () => request.get('/user/getUserInfo', {})
 
 export const updateUser = (user) => request.post('/user/update', user);
 
+export const updatePassword = (data) => request.post('/user/updatePassword', data);
+

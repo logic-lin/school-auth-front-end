@@ -19,7 +19,7 @@ import { setToken } from '@/utils/token';
 import { useStore } from 'react-redux';
 
 export default function RegisterForm() {
-  const formRef = useRef<FormInstance>();
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const history = useHistory()
   const store = useStore()
@@ -41,7 +41,7 @@ export default function RegisterForm() {
   }
 
   function onSubmitClick() {
-    formRef.current.validate().then((values) => {
+    form.validate().then((values) => {
       login(values);
     });
   }
@@ -55,7 +55,7 @@ export default function RegisterForm() {
       <Form
         className={styles['login-form']}
         layout="vertical"
-        ref={formRef}
+        form={form}
         initialValues={{ email: '1234@qq.com', password: '1234567890', password_confirm: '1234567890', phone: '13823608777', }}
       >
         <Form.Item
@@ -93,7 +93,11 @@ export default function RegisterForm() {
         <Form.Item
           field="password_confirm"
           label="密码确认"
-          rules={[{ required: true, message: "密码确认不可以为空" }]}
+          rules={[{ required: true, message: "密码确认不可以为空" }, {
+            validator(value, callback) {
+              if (value !== form.getFieldValue('password')) callback('确认密码与新密码不一致');
+            }
+          }]}
         >
           <Input.Password
             prefix={<IconLock />}
