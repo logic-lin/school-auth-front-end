@@ -23,7 +23,7 @@ export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const history = useHistory()
   const store = useStore()
-  function login(params) {
+  function register(params) {
     setLoading(true);
     registerUser(params)
       .then((res: any) => {
@@ -42,7 +42,8 @@ export default function RegisterForm() {
 
   function onSubmitClick() {
     form.validate().then((values) => {
-      login(values);
+      delete values.password_confirm;
+      register(values);
     });
   }
 
@@ -87,7 +88,6 @@ export default function RegisterForm() {
           <Input.Password
             prefix={<IconLock />}
             placeholder="请输入密码"
-            onPressEnter={onSubmitClick}
           />
         </Form.Item>
         <Form.Item
@@ -102,7 +102,6 @@ export default function RegisterForm() {
           <Input.Password
             prefix={<IconLock />}
             placeholder="请输入密码确认"
-            onPressEnter={onSubmitClick}
           />
         </Form.Item>
         <Space size={16} direction="vertical">

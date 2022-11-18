@@ -9,6 +9,8 @@ import {
   IconMenuUnfold,
   IconUser,
   IconStamp,
+  IconUserGroup,
+  IconFile,
 } from '@arco-design/web-react/icon';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
@@ -33,9 +35,11 @@ function getIconFromKey(key) {
     case 'dashboard':
       return <IconDashboard className={styles.icon} />;
     case 'user-info':
-      return <IconUser className={styles.icon} />;
+      return <IconFile className={styles.icon} />;
     case 'verify-account':
       return <IconStamp className={styles.icon} />;
+    case 'manage-account':
+      return <IconUserGroup className={styles.icon} />
     default:
       return <div className={styles['icon-empty']} />;
   }
@@ -268,7 +272,7 @@ function PageLayout() {
           </Layout>
         </Layout>
       )}
-    </Layout>
+    </Layout >
   );
 }
 
