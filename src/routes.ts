@@ -46,6 +46,13 @@ export const routes: IRoute[] = [
       { resource: 'manage-account', actions: ['read', 'write'] },
     ],
   },
+  {
+    name: '应用管理',
+    key: 'manage-application',
+    requiredPermissions: [
+      { resource: 'manage-application', actions: ['read', 'write'] },
+    ],
+  },
 ];
 
 export const getName = (path: string, routes) => {

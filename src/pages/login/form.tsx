@@ -20,16 +20,19 @@ export default function LoginForm() {
   const history = useHistory()
   const store = useStore()
 
+
   function login(params) {
     setLoading(true);
     loginUser(params.account, params.password).then((res: any) => {
-      Message.success('登陆成功')
       setToken(res?.token);
       store.dispatch({
         type: 'update-userInfo',
         payload: { userInfo: res.data },
       });
-      history.push('/')
+      Message.success('登陆成功')
+      const redirectUrl = history.location.search.match(/redirect=([^&]*)/)?.[1] || ""
+      console.log(redirectUrl, history.location.search)
+      history.push('/' + redirectUrl)
     }).finally(() => {
       setLoading(false)
     })
@@ -78,6 +81,14 @@ export default function LoginForm() {
         <Space size={16} direction="vertical">
           <Button type="primary" long onClick={onSubmitClick} loading={loading}>
             登录
+          </Button>
+          <Button
+            type="text"
+            long
+            className={styles['login-form-register-btn']}
+            onClick={() => history.push('/register')}
+          >
+            没有账号？立即注册
           </Button>
         </Space>
       </Form>

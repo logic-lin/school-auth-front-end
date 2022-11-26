@@ -108,6 +108,14 @@ export default function RegisterForm() {
           <Button type="primary" long onClick={onSubmitClick} loading={loading}>
             注册
           </Button>
+          <Button
+            type="text"
+            long
+            className={styles['login-form-register-btn']}
+            onClick={() => history.push('/login')}
+          >
+            返回登录
+          </Button>
         </Space>
       </Form>
     </div>

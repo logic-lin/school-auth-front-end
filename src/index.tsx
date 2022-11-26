@@ -46,8 +46,9 @@ function Index() {
         payload: { userInfo: res.data, userLoading: false },
       });
     }).catch(err => {
-      if (window.location.pathname.replace(/\//g, '') !== 'login') {
-        window.location.pathname = '/login';
+      const redirect = window.location.pathname.replace(/\//g, '')
+      if (redirect !== 'login') {
+        window.location.href = "/login?redirect=" + redirect;
       }
     })
   }
@@ -83,6 +84,8 @@ function Index() {
           <GlobalContext.Provider value={contextValue}>
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path="/auth" component={Login} />
+              <Route path="/register" component={Login} />
               <Route path="/" component={PageLayout} />
             </Switch>
           </GlobalContext.Provider>
