@@ -57,7 +57,6 @@ export default function RegisterForm() {
         className={styles['login-form']}
         layout="vertical"
         form={form}
-        initialValues={{ email: '1234@qq.com', password: '1234567890', password_confirm: '1234567890', phone: '13823608777', }}
       >
         <Form.Item
           field="phone"

@@ -19,7 +19,7 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const history = useHistory()
   const store = useStore()
-
+  const redirectUrl = history.location.search.match(/redirect=([^&]*)/)?.[1] || ""
 
   function login(params) {
     setLoading(true);
@@ -30,9 +30,8 @@ export default function LoginForm() {
         payload: { userInfo: res.data },
       });
       Message.success('登陆成功')
-      const redirectUrl = history.location.search.match(/redirect=([^&]*)/)?.[1] || ""
-      console.log(redirectUrl, history.location.search)
-      history.push('/' + redirectUrl)
+
+      history.push('/' + decodeURIComponent(redirectUrl))
     }).finally(() => {
       setLoading(false)
     })
@@ -86,7 +85,7 @@ export default function LoginForm() {
             type="text"
             long
             className={styles['login-form-register-btn']}
-            onClick={() => history.push('/passwordless')}
+            onClick={() => history.push('/passwordless?redirect=' + redirectUrl)}
           >
             口令登录
           </Button>

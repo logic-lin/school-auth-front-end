@@ -47,8 +47,10 @@ function Index() {
       });
     }).catch(err => {
       const redirect = window.location.pathname.replace(/\//g, '')
+      const search = window.location.search
+      const redirectUrl = redirect + search;
       if (redirect !== 'login') {
-        window.location.href = "/login?redirect=" + redirect;
+        window.location.href = "/login?redirect=" + encodeURIComponent(redirectUrl);
       }
     })
   }
