@@ -1,4 +1,4 @@
-import { loginUser } from '@/api/user';
+import { loginUser, loginUserByCode } from '@/api/user';
 import { getToken, setToken } from '@/utils/token';
 import {
   Form,
@@ -8,7 +8,7 @@ import {
   Message,
 } from '@arco-design/web-react';
 import { FormInstance } from '@arco-design/web-react/es/Form';
-import { IconLock, IconUser } from '@arco-design/web-react/icon';
+import { IconCode, IconLock, IconUser } from '@arco-design/web-react/icon';
 import React, { useEffect, useRef, useState } from 'react';
 import { useStore } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -23,7 +23,7 @@ export default function LoginForm() {
 
   function login(params) {
     setLoading(true);
-    loginUser(params.account, params.password).then((res: any) => {
+    loginUserByCode(params.account, params.code).then((res: any) => {
       setToken(res?.token);
       store.dispatch({
         type: 'update-userInfo',
@@ -54,7 +54,7 @@ export default function LoginForm() {
         className={styles['login-form']}
         layout="vertical"
         ref={formRef}
-        initialValues={{ account: 'root@super.com', password: '1234567890' }}
+        initialValues={{ account: 'root@super.com' }}
       >
         <Form.Item
           field="account"
@@ -68,13 +68,13 @@ export default function LoginForm() {
           />
         </Form.Item>
         <Form.Item
-          field="password"
-          label="密码"
-          rules={[{ required: true, message: "密码不可以为空" }]}
+          field="code"
+          label="口令"
+          rules={[{ required: true, message: "口令不可以为空" }]}
         >
           <Input.Password
-            prefix={<IconLock />}
-            placeholder="请输入密码"
+            prefix={<IconCode />}
+            placeholder="请输入口令"
             onPressEnter={onSubmitClick}
           />
         </Form.Item>
@@ -86,9 +86,9 @@ export default function LoginForm() {
             type="text"
             long
             className={styles['login-form-register-btn']}
-            onClick={() => history.push('/passwordless')}
+            onClick={() => history.push('/login')}
           >
-            口令登录
+            密码登录
           </Button>
           <Button
             type="text"

@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import LoginForm from './form';
 import RegisterForm from './registerForm';
 import AuthForm from './authForm';
+import PasswordlessForm from './passwordlessForm';
 import styles from './style/index.module.less';
 import { Button } from '@arco-design/web-react';
 import { useHistory, useParams } from 'react-router';
@@ -17,6 +18,7 @@ function Login() {
   const isAuth = history.location.pathname === '/auth';
   const isLogin = history.location.pathname === '/login';
   const isRegister = history.location.pathname === '/register';
+  const isPasswordless = history.location.pathname === '/passwordless';
 
   return (
     <div className={styles.container}>
@@ -25,6 +27,7 @@ function Login() {
           {isLogin && <LoginForm />}
           {isRegister && <RegisterForm />}
           {isAuth && <AuthForm />}
+          {isPasswordless && <PasswordlessForm />}
         </div>
         <div className={styles.footer}>
           <Footer />

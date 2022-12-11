@@ -86,6 +86,7 @@ function Index() {
               <Route path="/login" component={Login} />
               <Route path="/auth" component={Login} />
               <Route path="/register" component={Login} />
+              <Route path="/passwordless" component={Login} />
               <Route path="/" component={PageLayout} />
             </Switch>
           </GlobalContext.Provider>

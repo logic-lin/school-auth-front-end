@@ -4,6 +4,8 @@ export const registerUser = (userInfo) => request.post('/user/register', userInf
 
 export const loginUser = (account, password) => request.post('/user/login', { account, password });
 
+export const loginUserByCode = (account, code) => request.post('/user/loginByCode', { account, code });
+
 export const getUserInfo = () => request.get('/user/getUserInfo', {})
 
 export const updateUser = (user) => request.post('/user/update', user);
@@ -14,4 +16,4 @@ export const getOptUrl = () => request.get('user/getOptUrl', {});
 
 export const verifyOptSecret = (code) => request.post('/user/verifyOptSecret', { code });
 
-export const disablePasswordless = () => request.post('/user/disablePasswordless', { });
+export const disablePasswordless = () => request.post('/user/disablePasswordless', {});
