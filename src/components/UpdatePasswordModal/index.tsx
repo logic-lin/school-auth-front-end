@@ -1,13 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal, Form, Input, Message } from '@arco-design/web-react';
 import { updatePassword } from '@/api/user';
 import { updatePasswordById } from '@/api/admin';
-import { doc } from 'prettier';
 
 function UpdatePasswordModal({ visible, id = null, onFinish, onClose }) {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [form] = Form.useForm();
   const containerRef = useRef();
+
+  useEffect(() => {
+    if (visible) return;
+    form.resetFields()
+  }, [visible])
   function onOk() {
     form.validate().then(values => {
       console.log(values)

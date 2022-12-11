@@ -12,6 +12,7 @@ export interface IUserInfo {
   verify_status?: VerifyStatus;
   role?: Role;
   permissions: Record<string, string[]>;
+  enable_passwordless?: boolean;
 }
 export interface GlobalState {
   settings?: typeof defaultSettings;

@@ -42,11 +42,12 @@ import { generatePermission } from '@/routes';
 import { clearToken } from '@/utils/token';
 import VerifyTag from '../VerifyTag';
 import UpdatePasswordModal from '../UpdatePasswordModal';
+import PasswordlessManageModal from '../PasswordlessManageModal';
 
 function Navbar({ show }: { show: boolean }) {
-  const t = useLocale();
   const userInfo: any = useSelector((state: GlobalState) => state.userInfo);
   const [visible, setVisible] = useState(false);
+  const [visible2, setVisible2] = useState(false);
   const [_, setUserStatus] = useStorage('userStatus');
 
   function logout() {
@@ -60,6 +61,8 @@ function Navbar({ show }: { show: boolean }) {
       logout();
     } else if (key === 'reset-password') {
       setVisible(true);
+    } else if (key === 'passwordless-manage') {
+      setVisible2(true);
     }
   }
   const droplist = (
@@ -68,21 +71,10 @@ function Navbar({ show }: { show: boolean }) {
         <IconLock className={styles['dropdown-icon']} />
         修改密码
       </Menu.Item>
-      <Menu.SubMenu
-        key="more"
-        title={
-          <div style={{ width: 80 }}>
-            <IconLock className={styles['dropdown-icon']} />
-            {t['message.seeMore']}
-          </div>
-        }
-      >
-        <Menu.Item key="workplace">
-          <IconDashboard className={styles['dropdown-icon']} />
-          {t['menu.dashboard.workplace']}
-        </Menu.Item>
-      </Menu.SubMenu>
-
+      <Menu.Item key="passwordless-manage">
+        <IconSettings className={styles['dropdown-icon']} />
+        无密码认证
+      </Menu.Item>
       <Divider style={{ margin: '4px 0' }} />
       <Menu.Item key="logout">
         <IconPoweroff className={styles['dropdown-icon']} />
@@ -99,10 +91,15 @@ function Navbar({ show }: { show: boolean }) {
           <div className={styles['logo-name']}>Union Auth</div>
         </div>
       </div>
-      <UpdatePasswordModal 
-        visible={visible} 
-        onClose={() => setVisible(false)} 
-        onFinish={() => setVisible(false)} 
+      <UpdatePasswordModal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        onFinish={() => setVisible(false)}
+      />
+      <PasswordlessManageModal
+        visible={visible2}
+        onClose={() => setVisible2(false)}
+        onFinish={() => setVisible2(false)}
       />
       <ul className={styles.right}>
         <li>
