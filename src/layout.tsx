@@ -12,6 +12,7 @@ import {
   IconUserGroup,
   IconFile,
   IconApps,
+  IconHome,
 } from '@arco-design/web-react/icon';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
@@ -33,6 +34,8 @@ const Content = Layout.Content;
 
 function getIconFromKey(key) {
   switch (key) {
+    case 'home':
+      return <IconHome className={styles.icon} />
     case 'dashboard':
       return <IconDashboard className={styles.icon} />;
     case 'user-info':

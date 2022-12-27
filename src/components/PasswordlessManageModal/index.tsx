@@ -60,7 +60,7 @@ function UpdatePasswordModal({ visible, onFinish, onClose }) {
   }
   return (
     <Modal
-      title='无密码认证管理'
+      title='无密码登录管理'
       visible={visible}
       onOk={onOk}
       maskClosable={false}
